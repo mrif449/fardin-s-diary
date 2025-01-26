@@ -28,8 +28,8 @@ export default function Layout({ children }) {
       <div className="min-h-screen bg-light dark:bg-dark text-black dark:text-white transition-colors duration-200">
         <Head>
           <title>Fardin's Diary</title>
-          <meta name="description" content="A modern static blog" />
-          <link rel="icon" href="..\images\favicon.ico" />
+          <meta name="description" content="My personal blogging website" />
+          <link rel="icon" href="favicon.ico" />
         </Head>
 
         <nav className="border-b border-gray-200 dark:border-dark-secondary">
