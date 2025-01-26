@@ -31,3 +31,7 @@
 .dark .prose h2 {
   @apply text-white;
 }
+
+input::placeholder {
+  @apply text-gray-500 dark:text-gray-400;
+}

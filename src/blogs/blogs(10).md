@@ -1,9 +1,8 @@
 ---
 title: The Art of Journaling
 date: "2023-11-22T14:30:00"
-coverImage: "/images/blog7.jpg"
-slug: "blog7"
-description: "Explore the transformative benefits of journaling and learn how to make it a regular practice."
+tags: ["react", "frontend"]
+summary: "Explore the transformative benefits of journaling and learn how to make it a regular practice."
 ---
 
 ## The Art of Journaling

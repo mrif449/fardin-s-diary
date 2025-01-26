@@ -23,7 +23,10 @@ export async function getStaticProps({ params }) {
 
   return {
     props: {
-      frontmatter: data,
+      frontmatter: {
+        ...data,
+        tags: data.tags || []
+      },
       content,
       slug: params.slug
     }
@@ -42,6 +45,19 @@ export default function BlogPost({ frontmatter, content }) {
             {format(new Date(frontmatter.date), 'dd MMM yyyy')}
           </span>
         </div>
+
+        {Array.isArray(frontmatter.tags) && frontmatter.tags.length > 0 && (
+          <div className="flex flex-wrap gap-2 mb-6">
+            {frontmatter.tags.map(tag => (
+              <span 
+                key={tag}
+                className="px-2 py-1 text-sm rounded-full bg-primary bg-opacity-20 text-primary"
+              >
+                #{tag}
+              </span>
+            ))}
+          </div>
+        )}
 
         <div 
           className="prose dark:prose-invert max-w-none"
