@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom prose styles */
+.prose {
+  @apply text-black;
+}
+
+.prose h2 {
+  @apply text-2xl font-bold mt-8 mb-4;
+}
+
+.prose p {
+  @apply leading-relaxed mb-4;
+}
+
+.prose ul {
+  @apply list-disc pl-6 mb-4;
+}
+
+.prose code {
+  @apply bg-light-secondary dark:bg-dark-secondary px-2 py-1 rounded;
+}
+
+/* Dark mode overrides */
+.dark .prose {
+  @apply text-white;
+}
+
+.dark .prose h2 {
+  @apply text-white;
+}

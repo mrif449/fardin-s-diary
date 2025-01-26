@@ -1,0 +1,53 @@
+import fs from 'fs'
+import path from 'path'
+import matter from 'gray-matter'
+import { marked } from 'marked'
+import { format } from 'date-fns'
+import Layout from '../../components/Layout'
+
+export async function getStaticPaths() {
+  const files = fs.readdirSync(path.join('src/blogs'))
+  const paths = files.map(filename => ({
+    params: { slug: filename.replace('.md', '') }
+  }))
+
+  return { paths, fallback: false }
+}
+
+export async function getStaticProps({ params }) {
+  const markdownWithMeta = fs.readFileSync(
+    path.join('src/blogs', params.slug + '.md'),
+    'utf-8'
+  )
+  const { data, content } = matter(markdownWithMeta)
+
+  return {
+    props: {
+      frontmatter: data,
+      content,
+      slug: params.slug
+    }
+  }
+}
+
+export default function BlogPost({ frontmatter, content }) {
+  return (
+    <Layout>
+      <article className="max-w-3xl mx-auto px-4 py-12 text-black dark:text-white">
+        <h1 className="text-4xl font-bold mb-4">
+          {frontmatter.title}
+        </h1>
+        <div className="flex items-center space-x-4 mb-8">
+          <span className="text-primary">
+            {format(new Date(frontmatter.date), 'dd MMM yyyy')}
+          </span>
+        </div>
+
+        <div 
+          className="prose dark:prose-invert max-w-none"
+          dangerouslySetInnerHTML={{ __html: marked(content) }}
+        />
+      </article>
+    </Layout>
+  )
+}

@@ -1,0 +1,20 @@
+import Link from 'next/link'
+import { format } from 'date-fns'
+
+export default function BlogCard({ blog }) {
+  return (
+    <Link href={`/blog/${blog.slug}`} legacyBehavior>
+      <div className="bg-light-secondary dark:bg-dark-secondary rounded-lg p-6 hover:transform hover:scale-[1.01] transition-all duration-200 cursor-pointer shadow-sm">
+        <h2 className="text-2xl font-semibold text-black dark:text-white mb-2">
+          {blog.frontmatter.title}
+        </h2>
+        <p className="text-gray-700 dark:text-gray-300 mb-3">
+          {blog.frontmatter.summary}
+        </p>
+        <span className="text-primary text-sm">
+          {format(new Date(blog.frontmatter.date), 'dd MMM yyyy')}
+        </span>
+      </div>
+    </Link>
+  )
+}
