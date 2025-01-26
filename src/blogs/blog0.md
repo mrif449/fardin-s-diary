@@ -2,7 +2,7 @@
 title: Guidelines to Prepare for the IELTS Exam
 date: "2025-01-26"
 tags: ["IELTS"]
-summary: "Explore the transformative benefits of journaling and learn how to make it a regular practice."
+summary: "A comprehensive step-by-step guide to effectively prepare for the IELTS exam, covering test format, skill development, study plans, practice materials, and test day procedures."
 ---
 
 Preparing for the IELTS exam requires a structured and strategic

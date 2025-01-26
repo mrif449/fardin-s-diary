@@ -36,7 +36,7 @@ export default function Layout({ children }) {
           <div className="max-w-4xl mx-auto px-4 py-4 flex justify-between items-center">
             <Link href="/" legacyBehavior>
               <h1 className="text-xl font-bold text-primary cursor-pointer hover:opacity-80 transition-opacity">
-                DevBlog
+                Fardin's Diary
               </h1>
             </Link>
             <button
