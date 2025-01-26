@@ -32,7 +32,7 @@ export default function Layout({ children }) {
     <div className={darkMode ? 'dark' : ''}>
       <div className="min-h-screen bg-light dark:bg-dark text-black dark:text-white transition-colors duration-200">
         <Head>
-          <title>Static Blog</title>
+          <title>Fardin's Diary</title>
           <meta name="description" content="A modern static blog" />
           <link rel="icon" href="/images/favicon.ico" />
         </Head>
@@ -41,7 +41,7 @@ export default function Layout({ children }) {
           <div className="max-w-4xl mx-auto px-4 py-4 flex justify-between items-center">
             <Link href="/" legacyBehavior>
               <h1 className="text-xl font-bold text-primary cursor-pointer hover:opacity-80 transition-opacity">
-                DevBlog
+                Fardin's Diary
               </h1>
             </Link>
             <button
