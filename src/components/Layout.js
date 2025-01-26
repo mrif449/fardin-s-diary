@@ -5,12 +5,14 @@ import { useState, useEffect } from 'react'
 
 export default function Layout({ children }) {
   const [mounted, setMounted] = useState(false)
-  const [darkMode, setDarkMode] = useState(false)
+  const [darkMode, setDarkMode] = useState(true)
 
   useEffect(() => {
     setMounted(true)
-    const savedMode = localStorage.getItem('darkMode') === 'true'
-    setDarkMode(savedMode)
+    const savedMode = localStorage.getItem('darkMode')
+    if (savedMode !== null) {
+      setDarkMode(savedMode === 'true')
+    }
   }, [])
 
   const toggleDarkMode = () => {
@@ -25,9 +27,9 @@ export default function Layout({ children }) {
     <div className={darkMode ? 'dark' : ''}>
       <div className="min-h-screen bg-light dark:bg-dark text-black dark:text-white transition-colors duration-200">
         <Head>
-          <title>Static Blog</title>
+          <title>Fardin's Diary</title>
           <meta name="description" content="A modern static blog" />
-          <link rel="icon" href="/favicon.ico" />
+          <link rel="icon" href="..\images\favicon.ico" />
         </Head>
 
         <nav className="border-b border-gray-200 dark:border-dark-secondary">
