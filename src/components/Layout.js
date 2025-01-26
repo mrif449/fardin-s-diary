@@ -34,7 +34,6 @@ export default function Layout({ children }) {
         <Head>
           <title>Fardin's Diary</title>
           <meta name="description" content="A modern static blog" />
-          <link rel="icon" href="/images/favicon.ico" />
         </Head>
 
         <nav className="border-b border-gray-200 dark:border-dark-secondary">
