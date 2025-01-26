@@ -1,7 +1,12 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import { MoonIcon, SunIcon } from '@heroicons/react/24/solid'
 import { useState, useEffect } from 'react'
+import { 
+  MoonIcon, 
+  SunIcon, 
+  ChevronDoubleLeftIcon, 
+  ChevronDoubleRightIcon 
+} from '@heroicons/react/24/solid'
 
 export default function Layout({ children }) {
   const [mounted, setMounted] = useState(false)
@@ -27,16 +32,16 @@ export default function Layout({ children }) {
     <div className={darkMode ? 'dark' : ''}>
       <div className="min-h-screen bg-light dark:bg-dark text-black dark:text-white transition-colors duration-200">
         <Head>
-          <title>Fardin's Diary</title>
-          <meta name="description" content="My personal blogging website" />
-          <link rel="icon" href="favicon.ico" />
+          <title>Static Blog</title>
+          <meta name="description" content="A modern static blog" />
+          <link rel="icon" href="/images/favicon.ico" />
         </Head>
 
         <nav className="border-b border-gray-200 dark:border-dark-secondary">
           <div className="max-w-4xl mx-auto px-4 py-4 flex justify-between items-center">
             <Link href="/" legacyBehavior>
               <h1 className="text-xl font-bold text-primary cursor-pointer hover:opacity-80 transition-opacity">
-                Fardin's Diary
+                DevBlog
               </h1>
             </Link>
             <button
