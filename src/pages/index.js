@@ -8,7 +8,7 @@ import BlogCard from '../components/BlogCard'
 import Pagination from '../components/Pagination'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 
-const BLOGS_PER_PAGE = 5
+const BLOGS_PER_PAGE = 6
 
 export async function getStaticProps() {
   const files = fs.readdirSync(path.join('src/blogs'))
@@ -88,10 +88,10 @@ export default function Home({ allBlogs = [], allTags = [] }) {
 
   return (
     <Layout>
-      <div className="max-w-4xl mx-auto px-4 py-12 font-fira">
+      <div className="max-w-4xl mx-auto px-4 py-12">
         <div className="mb-8 space-y-4">
           <div className="flex justify-between items-center">
-            <div className="relative md:hidden mr-2"> {/* Hide on medium and larger screens */}
+            <div className="relative md:hidden mr-2 font-fira"> {/* Hide on medium and larger screens */}
               <button
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                 className="p-2 rounded-lg bg-light-secondary dark:bg-dark-secondary text-black dark:text-white hover:bg-opacity-80"
@@ -134,7 +134,7 @@ export default function Home({ allBlogs = [], allTags = [] }) {
               />
             </div>
           </div>
-          <div className="hidden md:block"> {/* Show on medium and larger screens */}
+          <div className="hidden md:block font-fira"> {/* Show on medium and larger screens */}
             <div className="flex flex-wrap gap-2">
               {Array.isArray(allTags) && allTags.map(tag => (
                 <button
@@ -153,7 +153,7 @@ export default function Home({ allBlogs = [], allTags = [] }) {
           </div>
         </div>
 
-        <div className="grid gap-6">
+        <div className="grid gap-6 md:grid-cols-2">
           {blogs.length > 0 ? (
             blogs.map((blog, index) => (
               <BlogCard 

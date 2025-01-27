@@ -36,18 +36,18 @@ export async function getStaticProps({ params }) {
 export default function BlogPost({ frontmatter, content }) {
   return (
     <Layout>
-      <article className="max-w-3xl mx-auto px-4 py-12 text-black dark:text-white font-fira">
-        <h1 className="text-4xl font-bold mb-4">
+      <article className="max-w-3xl mx-auto px-4 py-12 text-black dark:text-white">
+        <h1 className="text-4xl font-bold mb-4 font-fira">
           {frontmatter.title}
         </h1>
-        <div className="flex items-center space-x-4 mb-8">
+        <div className="flex items-center space-x-4 mb-8 font-inter">
           <span className="text-primary">
             {format(new Date(frontmatter.date), 'dd MMM yyyy')}
           </span>
         </div>
 
         {Array.isArray(frontmatter.tags) && frontmatter.tags.length > 0 && (
-          <div className="flex flex-wrap gap-2 mb-6">
+          <div className="flex flex-wrap gap-2 mb-6 font-fira">
             {frontmatter.tags.map(tag => (
               <span 
                 key={tag}
@@ -60,7 +60,7 @@ export default function BlogPost({ frontmatter, content }) {
         )}
 
         <div 
-          className="prose dark:prose-invert max-w-none"
+          className="prose dark:prose-invert max-w-none font-inter"
           dangerouslySetInnerHTML={{ __html: marked(content) }}
         />
       </article>
