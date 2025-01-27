@@ -36,13 +36,13 @@ export async function getStaticProps({ params }) {
 export default function BlogPost({ frontmatter, content }) {
   return (
     <Layout>
-      <article className="max-w-3xl mx-auto px-4 py-12 text-black dark:text-white">
+      <article className="max-w-4xl mx-auto px-4 py-5 text-black dark:text-white">
         <h1 className="text-4xl font-bold mb-4 font-fira">
           {frontmatter.title}
         </h1>
-        <div className="flex items-center space-x-4 mb-8 font-inter">
+        <div className="flex items-center space-x-4 mb-8 font-fira">
           <span className="text-primary">
-            {format(new Date(frontmatter.date), 'dd MMM yyyy')}
+            {format(new Date(frontmatter.date), 'dd MMMM yyyy')}
           </span>
         </div>
 

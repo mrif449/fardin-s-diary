@@ -29,7 +29,7 @@ export default function BlogCard({ blog, onTagClick }) {
           }
         </div>
 
-        <span className="text-primary text-sm block mt-3">
+        <span className="text-primary text-sm block mt-3 font-fira">
           {format(new Date(blog.frontmatter.date), 'dd MMM yyyy')}
         </span>
       </div>
