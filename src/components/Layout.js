@@ -30,7 +30,7 @@ export default function Layout({ children }) {
 
   return (
     <div className={darkMode ? 'dark' : ''}>
-      <div className="min-h-screen bg-light dark:bg-dark text-black dark:text-white transition-colors duration-200 font-playwrite">
+      <div className="min-h-screen bg-light dark:bg-dark text-black dark:text-white transition-colors duration-200">
         <Head>
           <title>devBlog</title>
           <meta name="description" content="A modern static blog" />

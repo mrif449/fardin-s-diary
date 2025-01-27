@@ -88,8 +88,8 @@ export default function Home({ allBlogs = [], allTags = [] }) {
 
   return (
     <Layout>
-      <div className="max-w-4xl mx-auto px-4 py-12">
-        <div className="mb-8 space-y-4">
+      <div className="max-w-4xl mx-auto px-4 py-4">
+        <div className="mb-4 space-y-4">
           <div className="flex justify-between items-center">
             <div className="relative md:hidden mr-2 font-fira"> {/* Hide on medium and larger screens */}
               <button
@@ -124,7 +124,7 @@ export default function Home({ allBlogs = [], allTags = [] }) {
                 </div>
               </div>
             </div>
-            <div className="flex-1 ml-2">
+            <div className="flex-1 ml-2"> {/* Show on medium and larger screens */}
               <input
                 type="text"
                 placeholder="Search posts..."
