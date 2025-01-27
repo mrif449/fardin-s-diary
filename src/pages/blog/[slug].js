@@ -37,17 +37,17 @@ export default function BlogPost({ frontmatter, content }) {
   return (
     <Layout>
       <article className="max-w-4xl mx-auto px-4 py-5 text-black dark:text-white">
-        <h1 className="text-4xl font-bold mb-4 font-fira">
+        <h1 className="text-4xl font-bold mb-2 font-fira">
           {frontmatter.title}
         </h1>
-        <div className="flex items-center space-x-4 mb-8 font-fira">
+        <div className="flex items-center space-x-4 mb-4 font-fira">
           <span className="text-primary">
             {format(new Date(frontmatter.date), 'dd MMMM yyyy')}
           </span>
         </div>
 
         {Array.isArray(frontmatter.tags) && frontmatter.tags.length > 0 && (
-          <div className="flex flex-wrap gap-2 mb-6 font-fira">
+          <div className="flex flex-wrap gap-2 mb-4 font-fira">
             {frontmatter.tags.map(tag => (
               <span 
                 key={tag}
