@@ -6,6 +6,7 @@ import matter from 'gray-matter'
 import Layout from '../components/Layout'
 import BlogCard from '../components/BlogCard'
 import Pagination from '../components/Pagination'
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline' // Correct import for Heroicons v2
 
 const BLOGS_PER_PAGE = 5
 
@@ -26,7 +27,7 @@ export async function getStaticProps() {
   // Get all unique tags safely
   const allTags = [...new Set(
     blogs.flatMap(blog => blog.frontmatter.tags)
-  )].filter(tag => typeof tag === 'string')
+  )].filter(tag => typeof tag === 'string').sort()
 
   return { 
     props: { 
@@ -41,6 +42,7 @@ export default function Home({ allBlogs = [], allTags = [] }) {
   const [currentPage, setCurrentPage] = useState(1)
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedTag, setSelectedTag] = useState(router.query.tag || '')
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   
   // Filter blogs
   const filteredBlogs = allBlogs.filter(blog => {
@@ -62,6 +64,7 @@ export default function Home({ allBlogs = [], allTags = [] }) {
   const handleTagClick = (tag) => {
     setSelectedTag(tag === selectedTag ? '' : tag)
     router.push(tag === selectedTag ? '/' : `/?tag=${tag}`, undefined, { shallow: true })
+    setIsDropdownOpen(false)
   }
 
   return (
@@ -69,7 +72,40 @@ export default function Home({ allBlogs = [], allTags = [] }) {
       <div className="max-w-4xl mx-auto px-4 py-12">
         <div className="mb-8 space-y-4">
           <div className="flex justify-between items-center">
-            <div className="w-64">
+            <div className="relative md:hidden mr-2"> {/* Hide on medium and larger screens */}
+              <button
+                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                className="p-2 rounded-lg bg-light-secondary dark:bg-dark-secondary text-black dark:text-white hover:bg-opacity-80"
+              >
+                <Bars3Icon className="h-6 w-6" />
+              </button>
+              <div className={`fixed inset-0 bg-black bg-opacity-50 z-20 transition-opacity duration-300 ${isDropdownOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+                <div className={`fixed left-0 top-0 bottom-0 w-64 bg-white dark:bg-dark-secondary p-4 z-30 transform transition-transform duration-300 ${isDropdownOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+                  <button
+                    onClick={() => setIsDropdownOpen(false)}
+                    className="p-2 rounded-lg bg-light-secondary dark:bg-dark-secondary text-black dark:text-white hover:bg-opacity-80 mb-4"
+                  >
+                    <XMarkIcon className="h-6 w-6" />
+                  </button>
+                  <div className="max-h-96 overflow-y-auto">
+                    {Array.isArray(allTags) && allTags.map(tag => (
+                      <button
+                        key={tag}
+                        onClick={() => handleTagClick(tag)}
+                        className={`block w-full text-left px-4 py-2 text-sm ${
+                          selectedTag === tag 
+                            ? 'bg-primary text-white' 
+                            : 'bg-light-secondary dark:bg-dark-secondary text-black dark:text-white hover:opacity-80'
+                        }`}
+                      >
+                        #{tag}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="flex-1">
               <input
                 type="text"
                 placeholder="Search posts..."
@@ -79,21 +115,22 @@ export default function Home({ allBlogs = [], allTags = [] }) {
               />
             </div>
           </div>
-
-          <div className="flex flex-wrap gap-2">
-            {Array.isArray(allTags) && allTags.map(tag => (
-              <button
-                key={tag}
-                onClick={() => handleTagClick(tag)}
-                className={`px-3 py-1 rounded-full text-sm ${
-                  selectedTag === tag 
-                    ? 'bg-primary text-white' 
-                    : 'bg-light-secondary dark:bg-dark-secondary text-black dark:text-white hover:opacity-80'
-                }`}
-              >
-                #{tag}
-              </button>
-            ))}
+          <div className="hidden md:block"> {/* Show on medium and larger screens */}
+            <div className="flex flex-wrap gap-2">
+              {Array.isArray(allTags) && allTags.map(tag => (
+                <button
+                  key={tag}
+                  onClick={() => handleTagClick(tag)}
+                  className={`px-4 py-2 rounded-lg text-sm ${
+                    selectedTag === tag 
+                      ? 'bg-primary text-white' 
+                      : 'bg-light-secondary dark:bg-dark-secondary text-black dark:text-white hover:opacity-80'
+                  }`}
+                >
+                  #{tag}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
 
