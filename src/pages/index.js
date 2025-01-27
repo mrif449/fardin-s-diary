@@ -46,7 +46,8 @@ export default function Home({ allBlogs = [], allTags = [] }) {
   
   // Filter blogs
   const filteredBlogs = allBlogs.filter(blog => {
-    const matchesSearch = blog.frontmatter.title.toLowerCase().includes(searchQuery.toLowerCase())
+    const matchesSearch = blog.frontmatter.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                          blog.frontmatter.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()))
     const matchesTag = !selectedTag || blog.frontmatter.tags.includes(selectedTag)
     return matchesSearch && matchesTag
   })
@@ -69,7 +70,7 @@ export default function Home({ allBlogs = [], allTags = [] }) {
 
   return (
     <Layout>
-      <div className="max-w-4xl mx-auto px-4 py-12">
+      <div className="max-w-4xl mx-auto px-4 py-12 font-inter">
         <div className="mb-8 space-y-4">
           <div className="flex justify-between items-center">
             <div className="relative md:hidden mr-2"> {/* Hide on medium and larger screens */}
@@ -79,33 +80,35 @@ export default function Home({ allBlogs = [], allTags = [] }) {
               >
                 <Bars3Icon className="h-6 w-6" />
               </button>
-              <div className={`fixed inset-0 bg-black bg-opacity-50 z-20 transition-opacity duration-300 ${isDropdownOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
-                <div className={`fixed left-0 top-0 bottom-0 w-64 bg-white dark:bg-dark-secondary p-4 z-30 transform transition-transform duration-300 ${isDropdownOpen ? 'translate-x-0' : '-translate-x-full'}`}>
-                  <button
-                    onClick={() => setIsDropdownOpen(false)}
-                    className="p-2 rounded-lg bg-light-secondary dark:bg-dark-secondary text-black dark:text-white hover:bg-opacity-80 mb-4"
-                  >
-                    <XMarkIcon className="h-6 w-6" />
-                  </button>
-                  <div className="max-h-96 overflow-y-auto">
-                    {Array.isArray(allTags) && allTags.map(tag => (
-                      <button
-                        key={tag}
-                        onClick={() => handleTagClick(tag)}
-                        className={`block w-full text-left px-4 py-2 text-sm ${
-                          selectedTag === tag 
-                            ? 'bg-primary text-white' 
-                            : 'bg-light-secondary dark:bg-dark-secondary text-black dark:text-white hover:opacity-80'
-                        }`}
-                      >
-                        #{tag}
-                      </button>
-                    ))}
+              {isDropdownOpen && (
+                <div className="fixed inset-0 bg-black bg-opacity-50 z-20 transition-opacity duration-300">
+                  <div className="fixed left-0 top-0 bottom-0 w-64 bg-white dark:bg-dark-secondary p-4 z-30 transform transition-transform duration-300">
+                    <button
+                      onClick={() => setIsDropdownOpen(false)}
+                      className="p-2 rounded-lg bg-light-secondary dark:bg-dark-secondary text-black dark:text-white hover:bg-opacity-80 mb-4"
+                    >
+                      <XMarkIcon className="h-6 w-6" />
+                    </button>
+                    <div className="max-h-96 overflow-y-auto">
+                      {Array.isArray(allTags) && allTags.map(tag => (
+                        <button
+                          key={tag}
+                          onClick={() => handleTagClick(tag)}
+                          className={`block w-full text-left px-4 py-2 text-sm ${
+                            selectedTag === tag 
+                              ? 'bg-primary text-white' 
+                              : 'bg-light-secondary dark:bg-dark-secondary text-black dark:text-white hover:opacity-80'
+                          }`}
+                        >
+                          #{tag}
+                        </button>
+                      ))}
+                    </div>
                   </div>
                 </div>
-              </div>
+              )}
             </div>
-            <div className="flex-1">
+            <div className="w-64">
               <input
                 type="text"
                 placeholder="Search posts..."
