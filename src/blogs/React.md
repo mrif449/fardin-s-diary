@@ -5,428 +5,160 @@ tags: ["React", "Interview"]
 summary: "A concise overview of fundamental React concepts, including its definition, key features, and the use of JSX."
 ---
 
-1. **What is React? Why is it used?**  
-
-   React is a JavaScript library for building user interfaces. It is used for creating fast, scalable, and interactive UI components.
-
-  
-
-2. **Key features of React?**  
-
-   - Declarative syntax  
-
-   - Component-based architecture  
-
-   - Virtual DOM  
-
-   - Unidirectional data flow  
-
-   - Support for hooks  
-
-  
-
-3. **What is JSX? How is it different from HTML?**  
-
-   JSX is a syntax extension that allows embedding HTML within JavaScript. It differs from HTML because it must follow JavaScript rules (e.g., using `className` instead of `class`).
-
-  
-
-4. **What are components in React? Name their types.**  
-
-   Components are reusable UI building blocks.  
-
-   - Functional components  
-
-   - Class components  
-
-  
-
-5. **Difference between functional and class components?**  
-
-   - Functional: Stateless, use hooks for state and lifecycle.  
-
-   - Class: Stateful, use lifecycle methods.
-
-  
-
-6. **What is the Virtual DOM? How does it work?**  
-
-   A lightweight copy of the real DOM. React updates the Virtual DOM first and efficiently reconciles changes with the real DOM.
-
-  
-
-7. **What are props? How are they different from state?**  
-
-   - Props: Immutable, passed from parent to child.  
-
-   - State: Mutable, managed within the component.
-
-  
-
-8. **What is state? How do you manage it?**  
-
-   State is a component’s local data. Managed using `useState` (functional components) or `this.setState` (class components).
-
-  
-
-9. **Controlled vs Uncontrolled components?**  
-
-   - Controlled: State is managed by React.  
-
-   - Uncontrolled: State is managed by the DOM.
-
-  
-
-10. **Role of `key` in lists?**  
-
-   Ensures React can identify and track list items efficiently during updates.
-
-  
-
----
-
-  
-
-### **Lifecycle Methods (Class Components)**
-
-11. **What are React lifecycle methods?**  
-
-   Methods invoked at different stages: mounting, updating, and unmounting.  
-
-  
-
-12. **Difference between `componentDidMount`, `componentDidUpdate`, and `componentWillUnmount`?**  
-
-   - `componentDidMount`: Runs after the component renders.  
-
-   - `componentDidUpdate`: Runs after updates.  
-
-   - `componentWillUnmount`: Runs before the component is destroyed.
-
-  
-
-13. **Purpose of `shouldComponentUpdate`?**  
-
-   Controls whether a component should re-render, improving performance.
-
-  
-
----
-
-  
-
-### **React Hooks**
-
-14. **What are hooks? Why were they introduced?**  
-
-   Functions that let you use state and lifecycle in functional components. They avoid complexity in class components.
-
-  
-
-15. **How does `useState` work?**  
-
-   Declares a state variable and a function to update it:  
-
-   ```javascript
-
-   const [count, setCount] = useState(0);
-
-   ```
-
-  
-
-16. **How does `useEffect` work?**  
-
-   Runs side effects after rendering (e.g., fetching data). Dependencies determine when it runs.  
-
-  
-
-17. **What is `useContext`?**  
-
-   Simplifies state sharing between components without props.  
-
-  
-
-18. **`useMemo` vs `useCallback`?**  
-
-   - `useMemo`: Memoizes computed values.  
-
-   - `useCallback`: Memoizes functions.
-
-  
-
-19. **What is `useRef`?**  
-
-   Accesses or stores a DOM element or mutable value without causing re-renders.
-
-  
-
----
-
-  
-
-### **React Rendering and Performance**
-
-20. **How does React handle rendering?**  
-
-   React uses the Virtual DOM and updates only the changed parts in the real DOM.
-
-  
-
-21. **Single-page vs Multi-page apps?**  
-
-   - SPA: Loads a single HTML file; updates dynamically.  
-
-   - MPA: Loads separate HTML files for each page.
-
-  
-
-22. **What are React fragments?**  
-
-   A lightweight wrapper to group elements without adding extra DOM nodes:  
-
-   ```javascript
-
-   <>Content</>
-
-   ```
-
-  
-
-23. **How to optimize React performance?**  
-
-   - Use React.memo  
-
-   - Split code with dynamic imports  
-
-   - Use lazy loading  
-
-  
-
-24. **What is React memoization?**  
-
-   Prevents unnecessary re-renders by memoizing components.
-
-  
-
----
-
-  
-
-### **React Routing**
-
-25. **What is React Router?**  
-
-   A library for handling navigation in SPAs.
-
-  
-
-26. **Difference between `BrowserRouter` and `HashRouter`?**  
-
-   - `BrowserRouter`: Uses clean URLs.  
-
-   - `HashRouter`: Uses hash-based URLs.
-
-  
-
-27. **Define routes in React Router?**  
-
-   ```javascript
-
-   <Route path="/about" element={<About />} />
-
-   ```
-
-  
-
-28. **What is `Switch`?**  
-
-   Renders the first matching route (Replaced by `Routes` in React Router v6).
-
-  
-
-29. **How to pass data between routes?**  
-
-   - Via URL params, query strings, or state:  
-
-   ```javascript
-
-   <Link to="/route" state={{ key: value }} />
-
-   ```
-
-  
-
----
-
-  
-
-### **State Management**
-
-30. **What is state lifting?**  
-
-   Moving state to a common parent to share it between child components.
-
-  
-
-31. **What is Redux?**  
-
-   A library for managing application-wide state.
-
-  
-
-32. **What is the Context API?**  
-
-   Provides global state management without third-party libraries.
-
-  
-
-33. **Difference between global and local state?**  
-
-   - Local: Component-specific.  
-
-   - Global: Shared across the app.
-
-  
-
----
-
-  
-
-### **Forms and Events**
-
-34. **How to handle forms in React?**  
-
-   Use controlled components and `onChange` events.
-
-  
-
-35. **Event handling in React?**  
-
-   React uses synthetic events for cross-browser consistency.  
-
-  
-
-36. **Prevent default behavior?**  
-
-   Use `event.preventDefault()`.  
-
-  
-
-37. **Bind methods to `this` in class components?**  
-
-   - Use `.bind(this)` or arrow functions:  
-
-   ```javascript
-
-   this.handleClick = this.handleClick.bind(this);
-
-   ```
-
-  
-
----
-
-  
-
-### **React Styling**
-
-38. **Ways to style React apps?**  
-
-   Inline styles, CSS, CSS modules, styled-components, or libraries like TailwindCSS.
-
-  
-
-39. **Inline styles vs CSS modules?**  
-
-   - Inline styles: Component-specific but no global styling.  
-
-   - CSS modules: Scoped and reusable.
-
-  
-
-40. **What are styled-components?**  
-
-   A library for writing CSS-in-JS.
-
-  
-
----
-
-  
-
-### **Miscellaneous**
-
-41. **What are HOCs?**  
-
-   Functions that take a component and return an enhanced component.
-
-  
-
-42. **`React.createElement` vs JSX?**  
-
-   JSX is syntactic sugar for `React.createElement`.
-
-  
-
-43. **What are portals?**  
-
-   Render elements outside the parent DOM tree:  
-
-   ```javascript
-
-   ReactDOM.createPortal(child, container);
-
-   ```
-
-  
-
-44. **What are PropTypes?**  
-
-   Type-checking for props:  
-
-   ```javascript
-
-   MyComponent.propTypes = { name: PropTypes.string };
-
-   ```
-
-  
-
-45. **What is SSR?**  
-
-   Server-side rendering generates HTML on the server. Faster initial loads.
-
-  
-
-46. **What is `React.StrictMode`?**  
-
-   Highlights potential problems without affecting production builds.
-
-  
-
-47. **`useReducer` vs `useState`?**  
-
-   - `useReducer`: Better for complex state logic.  
-
-   - `useState`: Simple state management.
-
-  
-
-48. **React vs Angular/Vue?**  
-
-   React focuses on UI, with flexibility for libraries, while Angular and Vue are full frameworks.
-
-  
-
-49. **Default exports vs Named exports?**  
-
-   - Default: One export per module.  
-
-   - Named: Multiple exports.
-
-  
-
-50. **What are error boundaries?**  
-
-   Components that catch JavaScript errors in child components. Implement with `componentDidCatch`.
+**1. What are the main features of React?**
+
+React is a popular JavaScript library for building user interfaces. Its key features include:
+
+- **Component-Based Architecture:** UIs are built as reusable, independent components. This promotes modularity, maintainability, and code reusability.
+- **Declarative Programming:** You describe what the UI should look like based on data, and React takes care of the actual DOM manipulation. This makes code easier to read and reason about.
+- **Virtual DOM:** React uses a virtual representation of the DOM. When data changes, React efficiently updates only the necessary parts of the real DOM, improving performance.
+- **JSX (JavaScript XML):** A syntax extension that allows you to write HTML-like structures within JavaScript code. Makes UI code more concise and readable.
+- **Unidirectional Data Flow:** Data flows in one direction, typically from parent to child components, which makes the application's data flow predictable and easier to debug.
+- **Large and Active Community:** Extensive documentation, vast resources, and a strong community make it easier to learn and troubleshoot issues.
+- **Flexibility and Extensibility:** React can be integrated into other applications and ecosystems and has numerous third-party libraries.
+- **Performance Optimization:** Built-in performance optimizations and tools help developers build fast and responsive apps.
+- **React Native:** Enables the building of native mobile apps using React and JavaScript.
+
+**2. Explain the difference between functional and class components.**
+
+- **Class Components:**
+    - Are JavaScript classes that extend React.Component.
+    - Use the render() method to define the UI structure.
+    - Can manage their internal state using this.state and lifecycle methods (e.g., componentDidMount, componentDidUpdate, componentWillUnmount).
+    - Were the traditional way to create React components prior to the introduction of hooks.
+    - Can be verbose and harder to understand sometimes, especially for simple components.
+- **Functional Components:**
+    - Are JavaScript functions that accept props as an argument.
+    - Return the UI structure (JSX).
+    - Initially were stateless. With the introduction of Hooks they can manage their own state and have access to lifecycles methods
+    - Are more concise and generally easier to read and understand, especially for simple components.
+    - Recommended for new code and are more performant than class components.
+
+**Key Difference:** The biggest difference lies in how they manage state and access lifecycles. Functional components utilize Hooks for state and side effects, making them more lightweight, while class components rely on class properties and methods for these functionalities. Functional components are the recommended way to write new React components.
+
+**3. What is JSX, and why is it used?**
+
+- **JSX (JavaScript XML):** Is a syntax extension to JavaScript that allows you to write HTML-like structures within your JavaScript code. It's not HTML or a template engine. It's a preprocessor that compiles to standard JavaScript function calls.
+    - Example: <h1>Hello, {name}!</h1> (where name is a JavaScript variable).
+- **Why Use JSX?**
+    - **Readability:** JSX makes it easier to visualize the structure of the UI code as it resembles HTML.
+    - **Conciseness:** Avoids verbose JavaScript DOM manipulation code.
+    - **Maintainability:** Code is easier to understand and maintain.
+    - **Developer Experience:** Makes UI development more intuitive.
+    - **Type Safety (with TypeScript):** JSX can be statically checked for errors when used with TypeScript.
+
+**4. How does the virtual DOM work?**
+
+1. **Virtual Representation:** React maintains a virtual representation (copy) of the actual DOM in memory called the Virtual DOM.
+2. **Initial Render:** When you initially render a component, React creates the corresponding virtual DOM representation.
+3. **State/Props Update:** When a component's state or props change, React doesn't immediately update the real DOM.
+4. **Diffing:** React creates a new virtual DOM representation. Then, it compares (or "diffs") the old and new virtual DOMs.
+5. **Patching:** React calculates the minimal set of changes needed to update the real DOM and applies them.
+6. **DOM Update:** Finally, React updates only the changed parts of the actual DOM, which is more efficient than a full DOM rewrite.
+
+**Benefits:**
+
+- **Performance**: Updating the virtual DOM is very fast, and minimal updates to the real DOM, leads to performance improvements.
+- **Batching Updates:** React can batch updates to the virtual DOM. Multiple state changes in a short amount of time don't cause multiple re-renders.
+
+**5. What are React hooks, and why are they useful?**
+
+- **React Hooks:** Are functions that allow you to "hook into" React state and lifecycle features from within functional components.
+- **Common Hooks:**
+    - useState: Allows functional components to have their own state.
+    - useEffect: Manages side effects (like data fetching, DOM manipulations) in functional components.
+    - useContext: Access React Context values from a functional component.
+    - useRef: Provides access to a mutable object, especially for accessing DOM elements directly.
+    - useMemo: Memoize the result of expensive computations.
+    - useCallback: Memoize callbacks functions.
+- **Why Are They Useful?**
+    - **Enable State in Functional Components:** Allows you to write logic that was previously only achievable with class components.
+    - **Simplified Logic:** Simplifies the code by removing the need for this bindings, complex lifecycle methods, and reduces boiler plate.
+    - **Code Reusability:** Easier to extract and reuse stateful and side-effect logic as custom hooks.
+    - **More Readable Code:** Functional components with hooks tend to be more concise and easier to understand.
+    - **Less Complexity:** Avoids the complexities of class-based component.
+
+**6. How is state management handled in React?**
+
+- **Component State (Local State):** Each component can manage its own state using the useState hook (for functional components) or this.state (for class components). This is suitable for state that is only relevant to that component or its immediate children.
+- **Props:** Data is passed from parent components to child components via props. While not state management in itself, using props is a key part of React's unidirectional data flow.
+- **Context API:** For shared data that needs to be accessible by multiple components deep within the component tree, React provides the Context API. It avoids passing props down the tree manually. It's useful for things like themes, user settings, etc.
+- **External State Management Libraries:** For more complex applications, libraries like Redux, Zustand, or Recoil provide more robust solutions for managing global application state. They offer features like centralized state storage, time-travel debugging, and middleware for handling asynchronous actions.
+
+**7. What is the role of keys in lists?**
+
+- **Keys in Lists:** When rendering lists of elements in React (using map(), for example), each element should have a unique key prop.
+    - Example:
+        
+        ```jsx
+          <ul>
+              {items.map(item => (
+                 <li key={item.id}>{item.name}</li>
+               ))}
+          </ul>
+        ```
+        
+- **Why are Keys Important?**
+    - **React's Reconciliation:** React uses keys to efficiently identify which items have changed, been added, or been removed in a list.
+    - **Performance:** Using keys improves the performance of re-rendering lists. Without keys, React has to do more work when updating the DOM.
+    - **Correct UI Updates:** Keys ensure the right elements are updated with the correct data and that changes are reflected properly in the UI.
+    - **Avoids Unexpected Behavior:** If you don't use keys correctly, you might encounter issues like UI elements not updating as expected.
+- **Best Practices for Keys:**
+    - Use stable and unique keys.
+    - Avoid using array indexes as keys (unless the list is static and never changes).
+    - Best choice for keys are ids coming from your backend.
+
+**8. What are higher-order components (HOCs)?**
+
+- **Higher-Order Components (HOCs):** Are functions that take a component as an argument and return a new, enhanced component.
+- **How They Work:** HOCs wrap another component and add or modify behavior, props, or rendering logic.
+- **Example:**
+    - A common HOC is to provide authentication and redirect unauthenticated users.
+    - HOCs can add logging, data fetching, or caching.
+- **Benefits:**
+    - **Code Reusability:** Allow you to reuse component logic across different components.
+    - **Component Logic Encapsulation:** Keep components lean by encapsulating common logic.
+    - **Abstraction:** Provides a way to separate concerns and keep components more maintainable.
+- **Alternative (Hooks):** With the introduction of React hooks, you can often achieve similar results as HOCs using custom hooks, making the code more straightforward and easier to read.
+
+**9. How to optimize React app performance?**
+
+- **Use Production Builds:** Deploying a production build of React disables development tools and other optimizations that improve performance in the browser.
+- **Code Splitting:** Break the app into smaller chunks of code that are loaded on demand (code splitting can be done at route level).
+- **Avoid Re-renders:**
+    - Use React.memo or useMemo to memoize components that don't need to re-render frequently.
+    - Use useCallback to memoize callbacks.
+    - Use shouldComponentUpdate in class components to prevent unnecessary re-renders.
+- **Image Optimization:** Serve optimized, compressed images. Use lazy loading images.
+- **List Optimization:** Use keys correctly when mapping through arrays.
+- **Minimize DOM Manipulation:** Use the virtual DOM effectively.
+- **Use Profilers:** React DevTools profiler can help you identify performance bottlenecks.
+- **Virtualize Lists:** For large lists, use libraries like react-window or react-virtualized to only render visible elements.
+- **Debounce/Throttle:** Limit the rate at which events like text input or resize triggers actions.
+
+**10. Explain the use of Redux in React.**
+
+- **Redux:** Is a predictable state management library often used with React, but can be used with other frameworks. It provides a centralized store for all your application's state.
+- **Redux Core Principles:**
+    - **Single Source of Truth:** The entire application state is stored in one object (the store).
+    - **State is Read-Only:** You can't directly modify state. You dispatch *actions* to update state.
+    - **Pure Functions:** State updates are handled by pure *reducers*, which take the current state and an action and return a new state.
+- **How Redux Works with React:**
+    1. **React Components Dispatch Actions:** When a component needs to update the state, it dispatches an action to the Redux store (actions are just plain JavaScript objects that describe the type of update).
+    2. **Redux Store:** The store contains the application's state and dispatches actions to the appropriate reducer based on their type.
+    3. **Reducers Update State:** Reducers, based on action type, compute the new state in an immutable way and return new state.
+    4. **Store Notifies Subscribers:** The Redux store notifies all subscribing components of the state change.
+    5. **React Components Re-render:** Connected React components that use the state re-render, reflecting the new data in the UI.
+- **Benefits of Redux:**
+    - **Predictable State Management:** Makes debugging easier as data flow is clear and consistent.
+    - **Centralized State:** Makes it easy to access data from any component.
+    - **Middleware Support:** Allows you to intercept actions, add logging, and perform asynchronous operations.
+    - **Time-Travel Debugging:** Redux DevTools enables time travel and makes development and debugging easier.
+- **When to Use Redux:**
+    - When you have complex state management needs with multiple components sharing state
+    - For medium to large-scale applications.
+    - When you need to maintain consistent state across components.
+    - When you require advanced debugging tools and features
+- **Drawbacks of Redux:**
+    - **Boilerplate:** Can be verbose and add a lot of overhead for smaller projects.
+    - **Learning Curve:** Requires learning new concepts and conventions.
