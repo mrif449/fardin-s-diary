@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/router'
 import fs from 'fs'
 import path from 'path'
@@ -6,7 +6,7 @@ import matter from 'gray-matter'
 import Layout from '../components/Layout'
 import BlogCard from '../components/BlogCard'
 import Pagination from '../components/Pagination'
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline' // Correct import for Heroicons v2
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 
 const BLOGS_PER_PAGE = 5
 
@@ -43,7 +43,8 @@ export default function Home({ allBlogs = [], allTags = [] }) {
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedTag, setSelectedTag] = useState(router.query.tag || '')
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
-  
+  const sidebarRef = useRef(null)
+
   // Filter blogs
   const filteredBlogs = allBlogs.filter(blog => {
     const matchesSearch = blog.frontmatter.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -68,6 +69,23 @@ export default function Home({ allBlogs = [], allTags = [] }) {
     setIsDropdownOpen(false)
   }
 
+  const handleClickOutside = (event) => {
+    if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
+      setIsDropdownOpen(false)
+    }
+  }
+
+  useEffect(() => {
+    if (isDropdownOpen) {
+      document.addEventListener('mousedown', handleClickOutside)
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [isDropdownOpen])
+
   return (
     <Layout>
       <div className="max-w-4xl mx-auto px-4 py-12 font-inter">
@@ -80,35 +98,33 @@ export default function Home({ allBlogs = [], allTags = [] }) {
               >
                 <Bars3Icon className="h-6 w-6" />
               </button>
-              {isDropdownOpen && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 z-20 transition-opacity duration-300">
-                  <div className="fixed left-0 top-0 bottom-0 w-64 bg-white dark:bg-dark-secondary p-4 z-30 transform transition-transform duration-300">
-                    <button
-                      onClick={() => setIsDropdownOpen(false)}
-                      className="p-2 rounded-lg bg-light-secondary dark:bg-dark-secondary text-black dark:text-white hover:bg-opacity-80 mb-4"
-                    >
-                      <XMarkIcon className="h-6 w-6" />
-                    </button>
-                    <div className="max-h-96 overflow-y-auto">
-                      {Array.isArray(allTags) && allTags.map(tag => (
-                        <button
-                          key={tag}
-                          onClick={() => handleTagClick(tag)}
-                          className={`block w-full text-left px-4 py-2 text-sm ${
-                            selectedTag === tag 
-                              ? 'bg-primary text-white' 
-                              : 'bg-light-secondary dark:bg-dark-secondary text-black dark:text-white hover:opacity-80'
-                          }`}
-                        >
-                          #{tag}
-                        </button>
-                      ))}
-                    </div>
+              <div className={`fixed inset-0 bg-black bg-opacity-50 z-20 transition-opacity duration-300 ${isDropdownOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+                <div ref={sidebarRef} className={`fixed left-0 top-0 bottom-0 w-64 bg-white dark:bg-dark-secondary p-4 z-30 transform transition-transform duration-300 ${isDropdownOpen ? 'translate-x-0' : '-translate-x-full'} overflow-y-auto`}>
+                  <button
+                    onClick={() => setIsDropdownOpen(false)}
+                    className="p-2 rounded-lg bg-light-secondary dark:bg-dark-secondary text-black dark:text-white hover:bg-opacity-80 mb-4"
+                  >
+                    <XMarkIcon className="h-6 w-6" />
+                  </button>
+                  <div className="space-y-2">
+                    {Array.isArray(allTags) && allTags.map(tag => (
+                      <button
+                        key={tag}
+                        onClick={() => handleTagClick(tag)}
+                        className={`block w-full text-left px-4 py-3 text-lg font-semibold ${
+                          selectedTag === tag 
+                            ? 'bg-primary text-white' 
+                            : 'bg-light-secondary dark:bg-dark-secondary text-black dark:text-white hover:opacity-80'
+                        } rounded-lg`}
+                      >
+                        #{tag}
+                      </button>
+                    ))}
                   </div>
                 </div>
-              )}
+              </div>
             </div>
-            <div className="w-64">
+            <div className="flex-1 ml-2">
               <input
                 type="text"
                 placeholder="Search posts..."
