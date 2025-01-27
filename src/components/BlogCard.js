@@ -12,7 +12,7 @@ export default function BlogCard({ blog, onTagClick }) {
           {blog.frontmatter.summary}
         </p>
         
-        <div className="flex flex-wrap gap-2 mt-2">
+        <div className="flex flex-wrap gap-2 mt-2 font-fira">
           {Array.isArray(blog.frontmatter.tags) && 
             blog.frontmatter.tags.map(tag => (
               <span
