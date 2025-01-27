@@ -30,7 +30,7 @@ export default function Layout({ children }) {
 
   return (
     <div className={darkMode ? 'dark' : ''}>
-      <div className="min-h-screen bg-light dark:bg-dark text-black dark:text-white transition-colors duration-200">
+      <div className="min-h-screen bg-light dark:bg-dark text-black dark:text-white transition-colors duration-200 font-playwrite">
         <Head>
           <title>devBlog</title>
           <meta name="description" content="A modern static blog" />
@@ -39,7 +39,7 @@ export default function Layout({ children }) {
         <nav className="border-b border-gray-200 dark:border-dark-secondary">
           <div className="max-w-4xl mx-auto px-4 py-4 flex justify-between items-center">
             <Link href="/" legacyBehavior>
-              <h1 className="text-xl font-bold text-primary cursor-pointer hover:opacity-80 transition-opacity">
+              <h1 className="text-xl font-bold text-primary cursor-pointer hover:opacity-80 transition-opacity font-fira">
               devBlog
               </h1>
             </Link>

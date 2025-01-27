@@ -88,7 +88,7 @@ export default function Home({ allBlogs = [], allTags = [] }) {
 
   return (
     <Layout>
-      <div className="max-w-4xl mx-auto px-4 py-12 font-inter">
+      <div className="max-w-4xl mx-auto px-4 py-12 font-fira">
         <div className="mb-8 space-y-4">
           <div className="flex justify-between items-center">
             <div className="relative md:hidden mr-2"> {/* Hide on medium and larger screens */}

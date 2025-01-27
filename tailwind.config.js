@@ -8,6 +8,8 @@ module.exports = {
       extend: {
         fontFamily: {
           inter: ['Inter', 'sans-serif'],
+          roboto: ['Roboto', 'sans-serif'],
+          fira: ['Fira Code', 'sans-serif'],
         },
         colors: {
           primary: '#3B82F6',

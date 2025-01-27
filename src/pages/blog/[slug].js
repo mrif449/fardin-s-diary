@@ -36,7 +36,7 @@ export async function getStaticProps({ params }) {
 export default function BlogPost({ frontmatter, content }) {
   return (
     <Layout>
-      <article className="max-w-3xl mx-auto px-4 py-12 text-black dark:text-white font-inter">
+      <article className="max-w-3xl mx-auto px-4 py-12 text-black dark:text-white font-fira">
         <h1 className="text-4xl font-bold mb-4">
           {frontmatter.title}
         </h1>
