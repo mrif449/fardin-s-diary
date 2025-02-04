@@ -11,4 +11,7 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
+module.exports = {
+  basePath: '/devBlog',
+  assetPrefix: '/devBlog/',
+}

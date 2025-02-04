@@ -77,10 +77,6 @@ summary: "A concise overview of fundamental database concepts, including their d
 
 **A:** SELECT column1, column2 FROM table_name WHERE condition;
 
-```sql
-For example: `SELECT name, email FROM users WHERE age > 25;`  This retrieves the names and email addresses of users who are over 25 years old.
-```
-
 **Q10. What are Primary and Foreign Keys?**
 
 **A:**

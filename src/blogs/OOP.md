@@ -23,7 +23,7 @@ _ **Polymorphism:** The ability of different classes to respond to the same meth
 _ **Class:** A class is a blueprint or template for creating objects. It defines the attributes (data) and methods (behavior) that objects of that class will have.
 _ **Object:** An object is an instance of a class. It's a concrete entity that exists in memory and can store data and perform actions according to its class definition.
 
-    **Difference:** A class is the definition, while an object is a specific realization of that definition. You can create multiple objects from the same class. Think of a class as a cookie cutter and objects as cookies.
+**Difference:** A class is the definition, while an object is a specific realization of that definition. You can create multiple objects from the same class. Think of a class as a cookie cutter and objects as cookies.
 
 **4. Question:** What is encapsulation and why is it important?
 
