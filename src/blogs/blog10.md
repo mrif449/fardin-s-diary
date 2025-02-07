@@ -1,7 +1,7 @@
 ---
 title: Junior Developer Written Test
 date: "2025-02-07"
-tags: ["Written Test", "Interview"]
+tags: ["Written", "Interview"]
 summary: "This document tests a junior developer's skills in problem-solving, databases, and software engineering with coding challenges, SQL queries, and key principles."
 ---
 ## Problem-Solving Skills (Programming)
