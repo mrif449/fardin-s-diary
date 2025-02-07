@@ -47,7 +47,8 @@ export default function Home({ allBlogs = [], allTags = [] }) {
 
   // Filter blogs
   const filteredBlogs = allBlogs.filter(blog => {
-    const matchesSearch = blog.frontmatter.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    const title = blog.frontmatter.title || '';
+    const matchesSearch = title.toLowerCase().includes(searchQuery.toLowerCase()) ||
                           blog.frontmatter.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()))
     const matchesTag = !selectedTag || blog.frontmatter.tags.includes(selectedTag)
     return matchesSearch && matchesTag

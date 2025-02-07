@@ -30,7 +30,7 @@ export default function BlogCard({ blog, onTagClick }) {
         </div>
 
         <span className="text-primary text-sm block mt-3 font-fira">
-          {format(new Date(blog.frontmatter.date), 'dd MMM yyyy')}
+          {blog.frontmatter.date ? format(new Date(blog.frontmatter.date), 'dd MMM yyyy') : 'No date available'}
         </span>
       </div>
     </Link>

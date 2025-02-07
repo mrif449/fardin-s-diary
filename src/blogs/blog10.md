@@ -1,3 +1,10 @@
+---
+title: Junior Developer Written Exam Preparation
+date: "2025-02-07"
+tags: ["nodeJS", "Interview"]
+summary: "A concise overview of fundamental Node.js concepts, including its definition, key features, event loop, and package management."
+---
+
 ## Problem-solving skills (programming)
 
 **Conceptual Questions:**
