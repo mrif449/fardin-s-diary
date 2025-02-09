@@ -60,7 +60,15 @@ export default function BlogPost({ frontmatter, content }) {
         )}
 
         <div 
-          className="prose dark:prose-invert max-w-none font-inter"
+          className="prose dark:prose-invert max-w-none font-inter
+            [&_h1]:border-b [&_h1]:pb-2 [&_h1]:border-gray-300 dark:[&_h1]:border-gray-600
+            [&_h2]:border-b [&_h2]:pb-2 [&_h2]:border-gray-300 dark:[&_h2]:border-gray-600
+            [&_h3]:border-b [&_h3]:pb-2 [&_h3]:border-gray-300 dark:[&_h3]:border-gray-600
+            [&_h4]:border-b [&_h4]:pb-2 [&_h4]:border-gray-300 dark:[&_h4]:border-gray-600
+            [&_h5]:border-b [&_h5]:pb-2 [&_h5]:border-gray-300 dark:[&_h5]:border-gray-600
+            [&_h6]:border-b [&_h6]:pb-2 [&_h6]:border-gray-300 dark:[&_h6]:border-gray-600
+            [&_pre]:max-w-full [&_pre]:overflow-x-auto [&_pre]:rounded-lg [&_pre]:p-4 [&_pre]:bg-gray-100 dark:[&_pre]:bg-gray-800
+            [&_code]:before:content-none [&_code]:after:content-none"
           dangerouslySetInnerHTML={{ __html: marked(content) }}
         />
       </article>
