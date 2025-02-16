@@ -4,7 +4,6 @@ date: "2025-01-27"
 tags: ["Database", "Interview"]
 summary: "A concise overview of fundamental database concepts, including their definitions, importance, and types."
 ---
-
 **Q1. What is a database?**
 
 **A:** A database is an organized collection of structured data that is stored and accessed electronically. It allows for efficient storage, retrieval, and management of information. Databases are fundamental to many software applications.

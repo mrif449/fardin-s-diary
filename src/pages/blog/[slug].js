@@ -15,28 +15,50 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const markdownWithMeta = fs.readFileSync(
-    path.join('src/blogs', params.slug + '.md'),
-    'utf-8'
-  )
-  const { data, content } = matter(markdownWithMeta)
+  try {
+    const markdownWithMeta = fs.readFileSync(
+      path.join('src/blogs', params.slug + '.md'),
+      'utf-8'
+    )
+    const { data, content } = matter(markdownWithMeta)
 
-  return {
-    props: {
-      frontmatter: {
-        ...data,
-        tags: data.tags || []
-      },
-      content,
-      slug: params.slug
+    return {
+      props: {
+        frontmatter: {
+          ...data,
+          tags: data.tags || []
+        },
+        content,
+        slug: params.slug
+      }
+    }
+  } catch (error) {
+    return {
+      props: {
+        frontmatter: {},
+        content: '',
+        slug: params.slug,
+        error: `Error loading markdown file: ${error.message}`
+      }
     }
   }
 }
 
-export default function BlogPost({ frontmatter, content }) {
+export default function BlogPost({ frontmatter, content, error }) {
+  if (error) {
+    return (
+      <Layout>
+        <div className="max-w-7xl mx-auto px-4 py-5 text-black dark:text-white">
+          <h1 className="text-4xl font-bold mb-2 font-fira">Error</h1>
+          <p className="text-red-500">{error}</p>
+        </div>
+      </Layout>
+    )
+  }
+
   return (
     <Layout>
-      <article className="max-w-4xl mx-auto px-4 py-5 text-black dark:text-white">
+      <article className="max-w-7xl mx-auto px-4 py-5 text-black dark:text-white">
         <h1 className="text-4xl font-bold mb-2 font-fira">
           {frontmatter.title}
         </h1>

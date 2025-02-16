@@ -1,5 +1,5 @@
 ---
-title: Object Oriented Programming Basics
+title: Obejct Oriented Programming
 date: "2025-01-27"
 tags: ["OOP", "Interview"]
 summary: "A concise overview of fundamental Object-Oriented Programming (OOP) concepts, including its definition, main pillars, and the difference between classes and objects."

@@ -5,8 +5,7 @@ export default function Document() {
   return (
     <Html>
       <Head>
-        {/* Empty link tag to prevent default favicon request */}
-        <link rel="icon" href="data:," />
+        <link rel="icon" href="favicon.ico" />
       </Head>
       <body>
         <Main />

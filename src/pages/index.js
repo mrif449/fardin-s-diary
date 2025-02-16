@@ -8,36 +8,63 @@ import BlogCard from '../components/BlogCard'
 import Pagination from '../components/Pagination'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 
-const BLOGS_PER_PAGE = 6
+const BLOGS_PER_PAGE = 9
 
 export async function getStaticProps() {
   const files = fs.readdirSync(path.join('src/blogs'))
-  const blogs = files.map(filename => {
-    const markdownWithMeta = fs.readFileSync(path.join('src/blogs', filename), 'utf-8')
-    const { data } = matter(markdownWithMeta)
-    return {
-      slug: filename.replace('.md', ''),
-      frontmatter: {
-        ...data,
-        tags: data.tags || [] // Ensure tags always exist as array
-      }
-    }
-  }).sort((a, b) => new Date(b.frontmatter.date) - new Date(a.frontmatter.date))
+  const blogs = []
+  const errors = []
+  const tagCount = {}
 
-  // Get all unique tags safely
-  const allTags = [...new Set(
-    blogs.flatMap(blog => blog.frontmatter.tags)
-  )].filter(tag => typeof tag === 'string').sort()
+  files.forEach(filename => {
+    try {
+      const markdownWithMeta = fs.readFileSync(path.join('src/blogs', filename), 'utf-8')
+      const { data } = matter(markdownWithMeta)
+      blogs.push({
+        slug: filename.replace('.md', ''),
+        frontmatter: {
+          ...data,
+          tags: data.tags || [] // Ensure tags always exist as array
+        }
+      })
+
+      // Count tags
+      data.tags.forEach(tag => {
+        if (tagCount[tag]) {
+          tagCount[tag].count += 1
+          tagCount[tag].latest = new Date(data.date)
+        } else {
+          tagCount[tag] = { count: 1, latest: new Date(data.date) }
+        }
+      })
+    } catch (error) {
+      errors.push(`Error in file ${filename}: ${error.message}`)
+    }
+  })
+
+  blogs.sort((a, b) => new Date(b.frontmatter.date) - new Date(a.frontmatter.date))
+
+  // Get top 10 most used tags
+  const topTags = Object.keys(tagCount)
+    .sort((a, b) => {
+      if (tagCount[b].count === tagCount[a].count) {
+        return tagCount[b].latest - tagCount[a].latest
+      }
+      return tagCount[b].count - tagCount[a].count
+    })
+    .slice(0, 10)
 
   return { 
     props: { 
       allBlogs: blogs,
-      allTags: allTags || []
+      allTags: Object.keys(tagCount),
+      topTags: topTags || [],
+      errors
     }
   }
 }
 
-export default function Home({ allBlogs = [], allTags = [] }) {
+export default function Home({ allBlogs = [], allTags = [], topTags = [], errors = [] }) {
   const router = useRouter()
   const [currentPage, setCurrentPage] = useState(1)
   const [searchQuery, setSearchQuery] = useState('')
@@ -89,7 +116,7 @@ export default function Home({ allBlogs = [], allTags = [] }) {
 
   return (
     <Layout>
-      <div className="max-w-4xl mx-auto px-4 py-4">
+      <div className="max-w-7xl mx-auto px-4 py-4">
         <div className="mb-4 space-y-4">
           <div className="flex justify-between items-center">
             <div className="relative md:hidden mr-2 font-fira"> {/* Hide on medium and larger screens */}
@@ -137,7 +164,7 @@ export default function Home({ allBlogs = [], allTags = [] }) {
           </div>
           <div className="hidden md:block font-fira"> {/* Show on medium and larger screens */}
             <div className="flex flex-wrap gap-2">
-              {Array.isArray(allTags) && allTags.map(tag => (
+              {Array.isArray(topTags) && topTags.map(tag => (
                 <button
                   key={tag}
                   onClick={() => handleTagClick(tag)}
@@ -154,7 +181,7 @@ export default function Home({ allBlogs = [], allTags = [] }) {
           </div>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-2">
+        <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           {blogs.length > 0 ? (
             blogs.map((blog, index) => (
               <BlogCard 
