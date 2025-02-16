@@ -70,7 +70,21 @@ export default function Home({ allBlogs = [], allTags = [], topTags = [], errors
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedTag, setSelectedTag] = useState(router.query.tag || '')
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
   const sidebarRef = useRef(null)
+
+  useEffect(() => {
+    const page = parseInt(router.query.page) || 1
+    setCurrentPage(page)
+  }, [router.query.page])
+
+  useEffect(() => {
+    router.beforePopState(({ url, as, options }) => {
+      const page = parseInt(new URL(as, window.location.href).searchParams.get('page')) || 1
+      setCurrentPage(page)
+      return true
+    })
+  }, [router])
 
   // Filter blogs
   const filteredBlogs = allBlogs.filter(blog => {
@@ -88,7 +102,9 @@ export default function Home({ allBlogs = [], allTags = [], topTags = [], errors
   const totalPages = Math.ceil(filteredBlogs.length / BLOGS_PER_PAGE)
 
   useEffect(() => {
-    setCurrentPage(1)
+    if (!router.query.page) {
+      setCurrentPage(1)
+    }
   }, [searchQuery, selectedTag])
 
   const handleTagClick = (tag) => {
@@ -113,6 +129,14 @@ export default function Home({ allBlogs = [], allTags = [], topTags = [], errors
       document.removeEventListener('mousedown', handleClickOutside)
     }
   }, [isDropdownOpen])
+
+  const handlePageChange = (page) => {
+    setIsLoading(true)
+    setCurrentPage(page)
+    router.push(`/?page=${page}`, undefined, { shallow: true }).then(() => {
+      setIsLoading(false)
+    })
+  }
 
   return (
     <Layout>
@@ -181,28 +205,36 @@ export default function Home({ allBlogs = [], allTags = [], topTags = [], errors
           </div>
         </div>
 
-        <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-          {blogs.length > 0 ? (
-            blogs.map((blog, index) => (
-              <BlogCard 
-                key={index} 
-                blog={blog} 
-                onTagClick={handleTagClick} 
-              />
-            ))
-          ) : (
-            <p className="text-center text-gray-500 dark:text-gray-400">
-              No posts found matching your criteria.
-            </p>
-          )}
-        </div>
+        {isLoading ? (
+          <div className="flex justify-center items-center py-10">
+            <div className="loader"></div>
+          </div>
+        ) : (
+          <>
+            <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+              {blogs.length > 0 ? (
+                blogs.map((blog, index) => (
+                  <BlogCard 
+                    key={index} 
+                    blog={blog} 
+                    onTagClick={handleTagClick} 
+                  />
+                ))
+              ) : (
+                <p className="text-center text-gray-500 dark:text-gray-400">
+                  No posts found matching your criteria.
+                </p>
+              )}
+            </div>
 
-        {totalPages > 1 && (
-          <Pagination 
-            currentPage={currentPage}
-            totalPages={totalPages}
-            onPageChange={setCurrentPage}
-          />
+            {totalPages > 1 && (
+              <Pagination 
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={handlePageChange}
+              />
+            )}
+          </>
         )}
       </div>
     </Layout>

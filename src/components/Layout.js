@@ -37,7 +37,7 @@ export default function Layout({ children }) {
         </Head>
 
         <nav className="border-b border-gray-200 dark:border-dark-secondary">
-          <div className="max-w-4xl mx-auto px-4 py-4 flex justify-between items-center">
+          <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
             <Link href="/" legacyBehavior>
               <h1 className="text-2xl font-bold text-primary cursor-pointer hover:opacity-80 transition-opacity font-fira">
               devBlog
